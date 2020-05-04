@@ -1,0 +1,59 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.6.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+}
+
+group = 'br.com.teste'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
+}
+
+repositories {
+//    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'com.h2database:h2'
+
+//    compile 'org.aspectj:aspectjweaver:1.8.13'
+//    compile 'org.aspectj:aspectjrt:1.8.13'
+
+    compile 'org.reflections:reflections:0.9.12'
+    compile 'br.com.climb:climb-orm:1.0.5'
+
+//    compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.12.1'
+
+//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
+//    testCompile 'org.hamcrest:hamcrest-library:2.1'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+//    compile 'org.springframework:spring-aop:5.0.1.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-aop'
+
+}
+
+test {
+    useJUnitPlatform()
+}
